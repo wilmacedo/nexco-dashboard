@@ -10,7 +10,7 @@ const defaultUser: User = {
   email: "wil.macedo.sa@gmail.com",
 };
 
-export function getUser(timeout = 350): Promise<User> {
+export function getUser(timeout = 0): Promise<User> {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(defaultUser);

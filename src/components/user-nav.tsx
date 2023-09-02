@@ -25,7 +25,7 @@ export async function UserNav() {
     <DropdownMenu>
       <DropdownMenuTrigger>
         <Avatar>
-          <AvatarImage src="https://github.com/wilmacedo.png" />
+          <AvatarImage src="/profile-pic.png" />
           <AvatarFallback>{getFallback(user)}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>

@@ -30,6 +30,7 @@ const tabsTriggerVariants = tv({
     size: {
       default: "px-3 py-1 text-sm",
       sm: "text-xs py-1 px-2",
+      md: "py-2 px-3 text-medium",
     },
   },
 

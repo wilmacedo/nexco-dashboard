@@ -10,7 +10,7 @@ export default function Layout({ children }: LayoutProps) {
     <>
       <Navbar />
 
-      <div className="pt-24">{children}</div>
+      <div className="pt-24 overflow-x-hidden">{children}</div>
     </>
   );
 }
