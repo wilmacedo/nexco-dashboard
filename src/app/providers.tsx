@@ -1,4 +1,5 @@
 import { Toaster } from "@/components/ui/toaster";
+import { ThemeProvider } from "@/contexts/useTheme";
 import { Fragment, ReactNode } from "react";
 
 interface ProvidersProps {
@@ -8,8 +9,10 @@ interface ProvidersProps {
 export function Providers({ children }: ProvidersProps) {
   return (
     <Fragment>
-      {children}
-      <Toaster />
+      <ThemeProvider>
+        {children}
+        <Toaster />
+      </ThemeProvider>
     </Fragment>
   );
 }

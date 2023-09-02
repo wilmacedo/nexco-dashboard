@@ -60,7 +60,7 @@ export function Selector({ options, onChange, ...props }: SelectorProps) {
       {selects.map((option, index) => (
         <div
           key={index}
-          className="mx-1 inline-flex gap-1 text-xs bg-[#F0F1EB] rounded-md"
+          className="mx-1 inline-flex gap-1 text-xs bg-[#F0F1EB] rounded-md dark:text-background"
         >
           <span className="p-2 pr-0">
             {options.find((op) => option === op.value)?.label}
@@ -91,7 +91,7 @@ export function Selector({ options, onChange, ...props }: SelectorProps) {
         {getOptions().length > 0 &&
           getOptions().map((option, index) => (
             <button
-              className="p-3 text-xs text-start transition-all hover:bg-[#D9EAB9] last:rounded-b-lg first:rounded-t-lg"
+              className="p-3 text-xs text-start transition-all hover:bg-[#D9EAB9] last:rounded-b-lg first:rounded-t-lg dark:hover:text-background"
               key={index}
               onClick={(event) => handleAdd(event, option.value)}
               type="button"

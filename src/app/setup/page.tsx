@@ -12,19 +12,23 @@ export default function SetupPage() {
       >
         <div className="inline-flex items-center gap-2">
           <Image src="/logo.svg" width={20} height={20} alt="Nexco logo" />
-          <h3 className="text-xl tracking-widest">NEXCO</h3>
+          <h3 className="text-xl tracking-widest dark:text-background">
+            NEXCO
+          </h3>
         </div>
 
         <div>
-          <h1 className="font-medium text-5xl">Começe sua jornada conosco.</h1>
-          <p className="mt-4">
+          <h1 className="font-medium text-5xl dark:text-background">
+            Começe sua jornada conosco.
+          </h1>
+          <p className="mt-4 dark:text-background">
             Tenha acesso as melhores recomendações baseadas no seu perfil.
           </p>
         </div>
 
         <div className="flex flex-col gap-4 items-center">
           <div className="max-w-sm p-4 flex flex-col gap-4 bg-black/10 rounded-lg">
-            <p className="text-sm">
+            <p className="text-sm dark:text-background">
               Muito interessante! Tive a oportunidade de achar uma startup do
               meu interesse e tive uma rápida resposta do CTO.
             </p>
@@ -39,7 +43,9 @@ export default function SetupPage() {
               />
 
               <div className="flex flex-col gap-1">
-                <p className="text-sm font-semibold">Wil Macedo</p>
+                <p className="text-sm font-semibold dark:text-background">
+                  Wil Macedo
+                </p>
                 <p className="text-sm text-black/60">
                   CTO na{" "}
                   <Link

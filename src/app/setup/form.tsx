@@ -100,7 +100,7 @@ export function Form() {
       <div>
         <button
           type="submit"
-          className="absolute bottom-12 right-32 px-[1.5rem] py-2.5 bg-[#D9EAB8] rounded-full transition-all hover:opacity-70 disabled:cursor-not-allowed disabled:bg-[#C3D1A6] disabled:hover:opacity-100"
+          className="absolute bottom-12 right-32 px-[1.5rem] py-2.5 bg-[#D9EAB8] rounded-full transition-all hover:opacity-70 disabled:cursor-not-allowed disabled:bg-[#C3D1A6] disabled:hover:opacity-100 dark:text-background"
           disabled={!isValid()}
         >
           Começar
