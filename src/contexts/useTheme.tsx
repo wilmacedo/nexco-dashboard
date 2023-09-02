@@ -1,5 +1,6 @@
 "use client";
 
+import { themeCookieName } from "@/config";
 import { getCookie, setCookie } from "cookies-next";
 import { ReactNode, createContext, useContext } from "react";
 
@@ -25,7 +26,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     ["light", "dark"].forEach((theme) => {
       if (currentTheme === theme) {
         const newTheme = theme === "light" ? "dark" : "light";
-        setCookie("theme", newTheme);
+        setCookie(themeCookieName, newTheme);
 
         html.classList.remove(theme);
         html.classList.add(newTheme);
@@ -34,7 +35,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
   }
 
   function getTheme(): Theme {
-    const theme = getCookie("theme");
+    const theme = getCookie(themeCookieName);
     if (!theme) return "light";
 
     return theme as Theme;

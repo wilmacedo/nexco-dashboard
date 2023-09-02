@@ -1,3 +1,4 @@
+import { themeCookieName } from "@/config";
 import { Theme } from "@/contexts/useTheme";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -18,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   function getTheme(): Theme {
-    const theme = cookies().get("theme");
+    const theme = cookies().get(themeCookieName);
     if (!theme || !["light", "dark"].includes(theme.value)) return "light";
 
     return theme.value as Theme;

@@ -41,3 +41,5 @@ export const companySizes: CompanySize[] = [
     size: "201+",
   },
 ];
+
+export const themeCookieName = "nexo/theme";
