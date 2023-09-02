@@ -1,13 +1,12 @@
 "use client";
 
 import { themeCookieName } from "@/config";
-import { getCookie, setCookie } from "cookies-next";
+import { setCookie } from "cookies-next";
 import { ReactNode, createContext, useContext } from "react";
 
 export type Theme = "light" | "dark";
 interface ThemeContextProps {
   toggleTheme: () => void;
-  getTheme: () => Theme;
 }
 
 interface ThemeProviderProps {
@@ -34,15 +33,8 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     });
   }
 
-  function getTheme(): Theme {
-    const theme = getCookie(themeCookieName);
-    if (!theme) return "light";
-
-    return theme as Theme;
-  }
-
   return (
-    <ThemeContext.Provider value={{ toggleTheme, getTheme }}>
+    <ThemeContext.Provider value={{ toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );

@@ -10,7 +10,7 @@ import { Separator } from "./ui/separator";
 import { UserNav } from "./user-nav";
 
 export function Navbar() {
-  const { toggleTheme, getTheme } = useTheme();
+  const { toggleTheme } = useTheme();
 
   return (
     <nav
@@ -39,13 +39,6 @@ export function Navbar() {
           <Separator orientation="vertical" className="mx-2 h-6" />
 
           <Notifications />
-          {/* <Button
-            variant="outline"
-            className="mr-1 py-1 px-2 inline-flex items-center gap-1"
-          >
-            <Bell size={14} />
-            <span className="text-sm">12</span>
-          </Button> */}
 
           <UserNav />
         </div>

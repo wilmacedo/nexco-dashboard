@@ -1,7 +1,6 @@
 "use client";
 
 import { Selector } from "@/components/selector";
-import { useToast } from "@/components/ui/use-toast";
 import { companySizes, interests } from "@/config";
 import { Building2, Check } from "lucide-react";
 import { FormEvent, useState } from "react";
@@ -9,12 +8,12 @@ import { FormEvent, useState } from "react";
 export function Form() {
   const [interest, setInterest] = useState<string[]>([]);
   const [companyType, setCompanyType] = useState<number[]>([]);
-  const { toast } = useToast();
+  const [news, setNews] = useState<boolean>(true);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    console.log({ interest, companyType });
+    console.log({ interest, companyType, news });
   }
 
   function isValid() {
@@ -50,7 +49,7 @@ export function Form() {
           Configure sua conta de acordo com o seu perfil de investimento
         </p>
 
-        <div className="mt-4">
+        <div className="mt-8">
           <p>
             Interesses <span className="text-sm text-red-300">*</span>
           </p>
@@ -66,9 +65,9 @@ export function Form() {
             Preferências de tamanho{" "}
             <span className="text-sm text-red-300">*</span>
           </p>
-          <div className="mt-2 mx-auto grid grid-cols-2 gap-4 max-w-md">
+          <div className="mt-2 grid grid-cols-4 gap-4">
             {companySizes.map((company, index) => (
-              <div
+              <button
                 key={index}
                 data-selected={companyType.includes(index)}
                 className="group relative px-3 py-6 flex flex-col items-center justify-center gap-2 rounded-lg border border-input cursor-pointer hover:ring-ring hover:ring-2 hover:ring-offset-2 data-[selected=true]:border-[#b2d56d]"
@@ -91,9 +90,30 @@ export function Form() {
                     {company.size} colaboradores
                   </span>
                 </div>
-              </div>
+              </button>
             ))}
           </div>
+        </div>
+
+        <div className="mt-8">
+          <p>Receber novidades</p>
+          <button
+            data-selected={news}
+            className="group mt-2 inline-flex items-center gap-2"
+            onClick={() => setNews((prev) => !prev)}
+          >
+            <div className="h-5 w-5 flex items-center justify-center top-3 right-3 border border-input rounded-full group-data-[selected=true]:border-ring">
+              <Check
+                size={10}
+                color="#b2d56d"
+                className="hidden group-data-[selected=true]:block"
+              />
+            </div>
+
+            <p className="text-sm">
+              Quero receber atualizações e sugestões de novas startups
+            </p>
+          </button>
         </div>
       </div>
 

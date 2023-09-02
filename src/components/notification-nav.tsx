@@ -9,7 +9,7 @@ export function Notifications() {
     <Popover>
       <PopoverTrigger className="mr-1 py-1 px-2 inline-flex items-center gap-1 border rounded-lg transition-colors hover:bg-muted">
         <Bell size={14} />
-        <span className="text-sm">12</span>
+        <span className="text-sm">0</span>
       </PopoverTrigger>
 
       <PopoverContent align="center" className="p-4">
