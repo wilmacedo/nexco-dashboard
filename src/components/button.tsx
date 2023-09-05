@@ -7,7 +7,7 @@ interface ButtonProps extends ComponentProps<"button"> {
 }
 
 const button = tv({
-  base: "rounded-lg transition-colors",
+  base: "rounded-lg transition-colors disabled:opacity-50 disabled:hover:bg-background disabled:cursor-not-allowed",
   variants: {
     variant: {
       outline: "border hover:bg-muted",

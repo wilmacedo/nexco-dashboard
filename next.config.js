@@ -3,10 +3,10 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        hostname: 'photos.wellfound.com'
-      }
-    ]
-  }
-}
+        hostname: "photos.wellfound.com",
+      },
+    ],
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

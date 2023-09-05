@@ -1,4 +1,6 @@
-import { User, getUser } from "@/services/get-user";
+"use client";
+
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import {
@@ -11,32 +13,28 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 
-export async function UserNav() {
-  const user = await getUser();
+export function UserNav() {
+  // const user = await getUser();
 
-  function getFallback(user: User) {
-    const firstLetter = user.firstName[0];
-    const secondLetter = user.lastName[0];
-
-    return firstLetter + secondLetter;
-  }
+  const { data: session } = useSession();
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
         <Avatar>
-          <AvatarImage src="/profile-pic.png" />
-          <AvatarFallback>{getFallback(user)}</AvatarFallback>
+          <AvatarImage src={session?.user?.image!} />
+          <AvatarFallback>{session?.user?.name?.charAt(0)}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="center" forceMount>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-2">
             <p className="text-sm font-medium leading-none">
-              {user.firstName} {user.lastName}
+              {/* {user.firstName} {user.lastName} */}
+              {session?.user?.name}
             </p>
             <p className="text-sm leading-none text-muted-foreground">
-              {user.email}
+              {session?.user?.email}
             </p>
           </div>
         </DropdownMenuLabel>
@@ -50,7 +48,9 @@ export async function UserNav() {
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Sair</DropdownMenuItem>
+        <DropdownMenuItem className="cursor-pointer" onClick={() => signOut()}>
+          Sair
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
