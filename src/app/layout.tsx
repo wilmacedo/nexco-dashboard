@@ -9,7 +9,10 @@ import { Providers } from "./providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Nexco",
+  title: {
+    default: "Nexco",
+    template: "%s | Nexco",
+  },
   description: "The Next platform of Contributing and investments",
 };
 

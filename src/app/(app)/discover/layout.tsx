@@ -1,14 +1,14 @@
 import { Metadata } from "next";
 import { Fragment, ReactNode } from "react";
 
-interface SetupLayoutProps {
+interface LayoutProps {
   children: ReactNode;
 }
 
 export const metadata: Metadata = {
-  title: "Configurador",
+  title: "Descobrir",
 };
 
-export default function SetupLayout({ children }: SetupLayoutProps) {
+export default function Layout({ children }: LayoutProps) {
   return <Fragment>{children}</Fragment>;
 }
