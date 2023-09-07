@@ -23,15 +23,13 @@ const notificationFormSchema = z.object({
 
 type NotificationFormValues = z.infer<typeof notificationFormSchema>;
 
-const defaultValues: Partial<NotificationFormValues> = {
-  communication: true,
-  social: false,
-};
-
-export function NotificationForm() {
+export function NotificationForm({
+  communication,
+  social,
+}: NotificationFormValues) {
   const form = useForm<NotificationFormValues>({
     resolver: zodResolver(notificationFormSchema),
-    defaultValues,
+    defaultValues: { communication, social },
   });
 
   function onSubmit(data: NotificationFormValues) {

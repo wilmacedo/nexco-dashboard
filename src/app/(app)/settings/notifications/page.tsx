@@ -1,7 +1,25 @@
 import { Separator } from "@/components/ui/separator";
+import { api } from "@/services/api";
+import { getServerSession } from "next-auth";
 import { NotificationForm } from "./notification-form";
 
-export default function Page() {
+async function getPreferences() {
+  const session = await getServerSession();
+  if (!session || !session.user) {
+    throw new Error("Not authorized");
+  }
+
+  const { preferences } = await api("/users/preferences", {
+    method: "POST",
+    body: JSON.stringify({ userEmail: session.user.email }),
+  });
+
+  return preferences;
+}
+
+export default async function Page() {
+  const preferences = await getPreferences();
+
   return (
     <div className="space-y-6">
       <div>
@@ -13,7 +31,7 @@ export default function Page() {
 
       <Separator />
 
-      <NotificationForm />
+      <NotificationForm {...preferences} />
     </div>
   );
 }

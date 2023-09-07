@@ -14,7 +14,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -24,18 +23,24 @@ const profileSchema = z.object({
     .string()
     .min(3, "O nome precisa ter ao menos 3 caracteres")
     .max(50, "O nome não pode ter mais de 50 caracteres"),
+  email: z.string().email().optional(),
 });
 
 type ProfileSchema = z.infer<typeof profileSchema>;
 
-export function ProfileForm() {
-  const { data: session } = useSession();
+interface ProfileFormProps {
+  name?: string | null;
+  image?: string | null;
+  email?: string | null;
+}
 
+export function ProfileForm({ name, image, email }: ProfileFormProps) {
   const form = useForm<ProfileSchema>({
     resolver: zodResolver(profileSchema),
     mode: "onChange",
     defaultValues: {
-      name: session?.user?.name ?? "",
+      name: name ?? "",
+      email: email ?? "",
     },
   });
 
@@ -74,10 +79,8 @@ export function ProfileForm() {
                     className="cursor-pointer hover:opacity-70"
                   >
                     <Avatar className="w-16 h-16 rounded-full bg-primary/10">
-                      <AvatarImage src={session?.user?.image!} />
-                      <AvatarFallback>
-                        {session?.user?.name?.charAt(0)}
-                      </AvatarFallback>
+                      <AvatarImage src={image!} />
+                      <AvatarFallback>{name?.charAt(0)}</AvatarFallback>
                     </Avatar>
                   </label>
                   <div>
@@ -92,6 +95,24 @@ export function ProfileForm() {
             />
           </CardContent>
         </Card>
+
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>E-mail</FormLabel>
+              <FormControl>
+                <Input
+                  disabled
+                  placeholder="wil.macedo.sa@gmail.com"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
         <FormField
           control={form.control}

@@ -1,7 +1,19 @@
 import { Separator } from "@/components/ui/separator";
+import { getServerSession } from "next-auth";
 import { ProfileForm } from "./profile-form";
 
-export default function Page() {
+async function getUser() {
+  const session = await getServerSession();
+  if (!session || !session.user) {
+    throw new Error("Not authorized");
+  }
+
+  return session.user;
+}
+
+export default async function Page() {
+  const user = await getUser();
+
   return (
     <div className="space-y-6">
       <div>
@@ -13,7 +25,7 @@ export default function Page() {
 
       <Separator />
 
-      <ProfileForm />
+      <ProfileForm {...user} />
     </div>
   );
 }
