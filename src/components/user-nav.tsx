@@ -14,14 +14,12 @@ import {
 } from "./ui/dropdown-menu";
 
 export function UserNav() {
-  // const user = await getUser();
-
   const { data: session } = useSession();
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <Avatar>
+        <Avatar className="w-8 h-8">
           <AvatarImage src={session?.user?.image!} />
           <AvatarFallback>{session?.user?.name?.charAt(0)}</AvatarFallback>
         </Avatar>
@@ -30,7 +28,6 @@ export function UserNav() {
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-2">
             <p className="text-sm font-medium leading-none">
-              {/* {user.firstName} {user.lastName} */}
               {session?.user?.name}
             </p>
             <p className="text-sm leading-none text-muted-foreground">
@@ -40,11 +37,11 @@ export function UserNav() {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
-            <Link href="/profile">Perfil</Link>
+          <DropdownMenuItem className="cursor-pointer" asChild>
+            <Link href="/settings">Perfil</Link>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Link href="/billing">Cobrança</Link>
+          <DropdownMenuItem className="cursor-pointer" asChild>
+            <Link href="/settings/billing">Cobrança</Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />

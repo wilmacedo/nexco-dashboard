@@ -2,6 +2,7 @@
 
 import { useTheme } from "@/contexts/useTheme";
 import { Moon, Sun } from "lucide-react";
+import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 import { Button } from "./button";
 import { Logo } from "./logo";
@@ -25,10 +26,13 @@ export function Navbar() {
           "lg:max-w-5xl"
         )}
       >
-        <div className="inline-flex items-center gap-2">
+        <Link
+          href="/discover"
+          className="inline-flex items-center gap-2 select-none"
+        >
           <Logo className="w-6 h-6" />
           <h3 className="font-semibold text-lg">NEXCO</h3>
-        </div>
+        </Link>
 
         <div className="inline-flex items-center gap-2">
           <Button variant="ghost" className="group p-2" onClick={toggleTheme}>

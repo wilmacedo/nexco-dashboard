@@ -1,13 +1,25 @@
 "use client";
 
 import { Selector } from "@/components/selector";
-import { companySizes, interests } from "@/config";
 import { Building2, Check } from "lucide-react";
 import { FormEvent, useState } from "react";
+import { twMerge } from "tailwind-merge";
 
-export function Form() {
+interface FormProps {
+  interests: {
+    id: string;
+    name: string;
+  }[];
+  companySizes: {
+    id: string;
+    name: string;
+    description: string;
+  }[];
+}
+
+export function Form({ interests, companySizes }: FormProps) {
   const [interest, setInterest] = useState<string[]>([]);
-  const [companyType, setCompanyType] = useState<number[]>([]);
+  const [companyType, setCompanyType] = useState<string[]>([]);
   const [news, setNews] = useState<boolean>(true);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -20,25 +32,25 @@ export function Form() {
     return interest.length > 0 && companyType.length > 0;
   }
 
-  function addCompanyType(type: number) {
-    if (companyType.includes(type)) return;
+  function addCompanyType(id: string) {
+    if (companyType.includes(id)) return;
 
-    setCompanyType((prev) => [...prev, type]);
+    setCompanyType((prev) => [...prev, id]);
   }
 
-  function removeCompanyType(type: number) {
-    if (!companyType.includes(type)) return;
+  function removeCompanyType(id: string) {
+    if (!companyType.includes(id)) return;
 
-    setCompanyType((prev) => prev.filter((t) => t !== type));
+    setCompanyType((prev) => prev.filter((item) => item !== id));
   }
 
-  function handleClick(type: number) {
-    if (companyType.includes(type)) {
-      removeCompanyType(type);
+  function handleClick(id: string) {
+    if (companyType.includes(id)) {
+      removeCompanyType(id);
       return;
     }
 
-    addCompanyType(type);
+    addCompanyType(id);
   }
 
   return (
@@ -54,7 +66,10 @@ export function Form() {
             Interesses <span className="text-sm text-red-300">*</span>
           </p>
           <Selector
-            options={interests}
+            options={interests.map(({ id, name }) => ({
+              value: id,
+              label: name,
+            }))}
             onChange={setInterest}
             placeholder="Pesquise por um assunto"
           />
@@ -65,13 +80,23 @@ export function Form() {
             Preferências de tamanho{" "}
             <span className="text-sm text-red-300">*</span>
           </p>
-          <div className="mt-2 grid grid-cols-4 gap-4">
+          <div
+            className={twMerge(
+              "mt-2 grid grid-cols-4 gap-4",
+              companySizes.length === 0 && "grid-cols-1"
+            )}
+          >
+            {companySizes.length === 0 && (
+              <p className="text-xs text-muted-foreground">
+                Não foi possível carregar os tamanhos
+              </p>
+            )}
             {companySizes.map((company, index) => (
               <button
                 key={index}
-                data-selected={companyType.includes(index)}
+                data-selected={companyType.includes(company.id)}
                 className="group relative px-3 py-6 flex flex-col items-center justify-center gap-2 rounded-lg border border-input cursor-pointer hover:ring-ring hover:ring-2 hover:ring-offset-2 data-[selected=true]:border-[#b2d56d]"
-                onClick={() => handleClick(index)}
+                onClick={() => handleClick(company.id)}
               >
                 <div className="absolute h-5 w-5 flex items-center justify-center top-3 right-3 border border-input rounded-full group-data-[selected=true]:border-ring">
                   <Check
@@ -87,7 +112,7 @@ export function Form() {
                 <div className="text-center">
                   <h3 className="font-semibold">{company.name}</h3>
                   <span className="text-sm opacity-70">
-                    {company.size} colaboradores
+                    {company.description}
                   </span>
                 </div>
               </button>

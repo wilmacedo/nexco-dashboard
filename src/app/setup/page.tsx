@@ -1,8 +1,36 @@
+import { api } from "@/services/api";
 import Image from "next/image";
 import Link from "next/link";
 import { Form } from "./form";
 
-export default function SetupPage() {
+async function getInterests() {
+  try {
+    const { interests } = await api("/interests");
+    if (!interests) return [];
+
+    return interests;
+  } catch (error) {
+    return [];
+  }
+}
+
+async function getCompanySizes() {
+  try {
+    const { companyTypes } = await api("/company-types");
+    if (!companyTypes) return [];
+
+    return companyTypes;
+  } catch (error) {
+    return [];
+  }
+}
+
+export default async function SetupPage() {
+  const [interests, companySizes] = await Promise.all([
+    getInterests(),
+    getCompanySizes(),
+  ]);
+
   return (
     <main className="w-screen h-screen p-6 grid grid-cols-1 gap-12 md:grid-cols-[1fr_2fr]">
       <section
@@ -63,7 +91,7 @@ export default function SetupPage() {
         </div>
       </section>
       <section className="py-16 px-8">
-        <Form />
+        <Form interests={interests} companySizes={companySizes} />
       </section>
     </main>
   );
