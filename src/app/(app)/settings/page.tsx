@@ -1,11 +1,13 @@
 import { Separator } from "@/components/ui/separator";
+import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 import { ProfileForm } from "./profile-form";
 
 async function getUser() {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
   if (!session || !session.user) {
-    throw new Error("Not authorized");
+    redirect("/register");
   }
 
   return session.user;

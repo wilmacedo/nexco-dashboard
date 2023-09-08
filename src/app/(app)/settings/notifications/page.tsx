@@ -1,20 +1,27 @@
 import { Separator } from "@/components/ui/separator";
+import { authOptions } from "@/lib/auth";
 import { api } from "@/services/api";
+import { Preferences } from "@/types/request";
 import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 import { NotificationForm } from "./notification-form";
 
 async function getPreferences() {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
   if (!session || !session.user) {
-    throw new Error("Not authorized");
+    redirect("/register");
   }
 
-  const { preferences } = await api("/users/preferences", {
-    method: "POST",
-    body: JSON.stringify({ userEmail: session.user.email }),
-  });
+  try {
+    const { data } = await api<{ preferences: Preferences }>(
+      "/users/preferences",
+      { next: { tags: ["preferences"] } }
+    );
 
-  return preferences;
+    return data.preferences;
+  } catch (error) {
+    return { communication: false, social: false };
+  }
 }
 
 export default async function Page() {

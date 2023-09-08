@@ -13,33 +13,41 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { toast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2 } from "lucide-react";
+import { useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { createAction } from "./notification-action";
 
 const notificationFormSchema = z.object({
-  communication: z.boolean().default(false).optional(),
-  social: z.boolean().default(false).optional(),
+  communication: z.boolean().optional(),
+  social: z.boolean().optional(),
 });
 
-type NotificationFormValues = z.infer<typeof notificationFormSchema>;
+export type NotificationFormValues = z.infer<typeof notificationFormSchema>;
 
 export function NotificationForm({
   communication,
   social,
 }: NotificationFormValues) {
+  const [isPending, startTransaction] = useTransition();
+  console.log({ communication, social });
+
   const form = useForm<NotificationFormValues>({
     resolver: zodResolver(notificationFormSchema),
     defaultValues: { communication, social },
   });
 
   function onSubmit(data: NotificationFormValues) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
+    startTransaction(async () => {
+      try {
+        await createAction(data);
+        toast({
+          title: "Notificações atualizadas!",
+        });
+      } catch (error) {
+        toast({ title: `Erro ao atualizar notificações: ${error}` });
+      }
     });
   }
 
@@ -101,8 +109,14 @@ export function NotificationForm({
           </Card>
         </div>
 
-        <Button variant="filled" type="submit">
-          Atualizar
+        <Button
+          disabled={isPending}
+          className="h-10 w-24 flex items-center justify-center"
+          variant="filled"
+          type="submit"
+        >
+          {isPending && <Loader2 className="h-4 w-4 animate-spin" />}
+          {!isPending && <span>Atualizar</span>}
         </Button>
       </form>
     </Form>

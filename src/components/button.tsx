@@ -9,7 +9,7 @@ const button = tv({
       outline: "border hover:bg-muted",
       ghost: "hover:bg-muted hover:bg-muted",
       filled:
-        "transition-all text-sm py-2.5 px-[1rem] bg-[#D9EAB8] disabled:bg-[#C3D1A6] dark:text-background hover:opacity-70",
+        "transition-all text-sm py-2.5 px-[1rem] bg-[#D9EAB8] disabled:bg-[#C3D1A6] dark:text-background hover:opacity-70 disabled:hover:bg-[#C3D1A6]",
     },
   },
 });

@@ -1,11 +1,12 @@
 import { api } from "@/services/api";
+import { CompanySize, Interest } from "@/types/request";
 import Image from "next/image";
 import Link from "next/link";
 import { Form } from "./form";
 
 async function getInterests() {
   try {
-    const { interests } = await api("/interests");
+    const { data: interests } = await api<Interest[]>("/interests");
     if (!interests) return [];
 
     return interests;
@@ -16,7 +17,7 @@ async function getInterests() {
 
 async function getCompanySizes() {
   try {
-    const { companyTypes } = await api("/company-types");
+    const { data: companyTypes } = await api<CompanySize[]>("/company-types");
     if (!companyTypes) return [];
 
     return companyTypes;
