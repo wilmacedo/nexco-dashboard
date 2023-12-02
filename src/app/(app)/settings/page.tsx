@@ -7,7 +7,7 @@ import { ProfileForm } from "./profile-form";
 async function getUser() {
   const session = await getServerSession(authOptions);
   if (!session || !session.user) {
-    redirect("/register");
+    redirect("/login");
   }
 
   return session.user;

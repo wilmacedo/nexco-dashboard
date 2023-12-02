@@ -6,7 +6,7 @@ interface LayoutProps {
 }
 
 export const metadata: Metadata = {
-  title: "Criar uma conta",
+  title: "Entrar com uma conta",
 };
 
 export default function Layout({ children }: LayoutProps) {

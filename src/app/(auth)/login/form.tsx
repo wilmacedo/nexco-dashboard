@@ -71,10 +71,8 @@ export function Form() {
       className="h-full flex items-center justify-center"
     >
       <div className="text-center">
-        <h1 className="text-xl md:text-3xl font-semibold">Criar conta</h1>
-        <p className="mt-2 text-sm">
-          Faça o registro da sua conta via e-mail ou Google
-        </p>
+        <h1 className="text-xl md:text-3xl font-semibold">Entrar</h1>
+        <p className="mt-2 text-sm">Entre com sua conta via e-mail ou Google</p>
 
         <div className="mt-4">
           <Input id="email" type="email" placeholder="nome@exemplo.com" />

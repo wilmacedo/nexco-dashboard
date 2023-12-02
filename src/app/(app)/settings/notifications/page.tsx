@@ -9,7 +9,7 @@ import { NotificationForm } from "./notification-form";
 async function getPreferences() {
   const session = await getServerSession(authOptions);
   if (!session || !session.user) {
-    redirect("/register");
+    redirect("/login");
   }
 
   try {

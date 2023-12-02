@@ -34,7 +34,7 @@ export async function api<T>(
 
   const baseUrl = process.env.SERVER_URL || "http://localhost:3333";
   const request = await fetch(baseUrl + route, { ...params, headers });
-  if (request.status === 204) {
+  if (request.status === 204 || request.status === 201) {
     return { data: {} as T, status: request.status };
   }
 

@@ -31,7 +31,6 @@ export function NotificationForm({
   social,
 }: NotificationFormValues) {
   const [isPending, startTransaction] = useTransition();
-  console.log({ communication, social });
 
   const form = useForm<NotificationFormValues>({
     resolver: zodResolver(notificationFormSchema),
