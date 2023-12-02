@@ -17,10 +17,20 @@ interface SessionProps {
 }
 
 export function authorized({ req: request }: AuthorizedProps): boolean {
+  let token;
   const sessionToken = request.cookies.get("next-auth.session-token");
-  if (!sessionToken) return false;
+  const secureSessionToken = request.cookies.get(
+    "__Secure-next-auth.session-token"
+  );
+  if (sessionToken) {
+    token = sessionToken;
+  } else if (secureSessionToken) {
+    token = secureSessionToken;
+  } else {
+    return false;
+  }
 
-  const { value } = sessionToken;
+  const { value } = token;
 
   return !!value;
 }
