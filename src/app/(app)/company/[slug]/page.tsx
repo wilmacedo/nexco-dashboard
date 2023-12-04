@@ -21,21 +21,6 @@ async function getCompanyDetails(
   });
 }
 
-function extractMainDomain(url: string) {
-  try {
-    let hostname = new URL(url).hostname;
-    let parts = hostname.split(".").reverse();
-
-    if (parts.length > 2) {
-      hostname = `${parts[1]}.${parts[0]}`;
-    }
-
-    return hostname + "/";
-  } catch (error) {
-    return url;
-  }
-}
-
 async function getProcessedData(hash: string) {
   try {
     const request = await fetch(
@@ -125,7 +110,7 @@ export default async function Page({ params }: PageProps) {
                   href={company.website}
                   className="text-sm hover:underline"
                 >
-                  {extractMainDomain(company.website)}
+                  {company.website.replace("https://", "")}
                 </Link>
               </div>
 

@@ -12,6 +12,9 @@ const nextConfig = {
       {
         hostname: "idx.digital",
       },
+      {
+        hostname: "www.agenciarock.com.br",
+      },
     ],
   },
 };
