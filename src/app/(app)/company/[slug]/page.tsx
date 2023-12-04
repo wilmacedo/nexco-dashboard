@@ -118,6 +118,16 @@ export default async function Page({ params }: PageProps) {
                 <span className="font-semibold text-sm">Localização</span>
                 <span className="text-sm">{company.city}</span>
               </div>
+
+              <div className="flex flex-col">
+                <span className="font-semibold text-sm">Tipo de empresa</span>
+                <span className="text-sm text-muted-foreground">N/A</span>
+              </div>
+
+              <div className="flex flex-col">
+                <span className="font-semibold text-sm">Categorias</span>
+                <span className="text-sm text-muted-foreground">N/A</span>
+              </div>
             </div>
           </div>
           <div className="mt-4">

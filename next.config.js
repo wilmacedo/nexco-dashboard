@@ -15,6 +15,9 @@ const nextConfig = {
       {
         hostname: "www.agenciarock.com.br",
       },
+      {
+        hostname: "assets-global.website-files.com",
+      },
     ],
   },
 };

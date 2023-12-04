@@ -1,9 +1,18 @@
+import { companies } from "./companies";
+
 export const tabs = [
   { value: "featured", label: "Destaques" },
   { value: "interest", label: "Interesses", block: true },
 ];
 
 export const startups = [
+  {
+    name: companies[0].name,
+    logo: companies[0].logo,
+    description: companies[0].shortDescription,
+    type: "Tecnologia",
+    location: companies[0].city,
+  },
   {
     name: "Benchling",
     logo: "https://photos.wellfound.com/startups/i/112872-1510bdf3d085dbf0a71382613beacd74-medium_jpg.jpg?buster=1589648026",
