@@ -1,6 +1,6 @@
 export const tabs = [
-  { value: "interest", label: "Interesses" },
   { value: "featured", label: "Destaques" },
+  { value: "interest", label: "Interesses", block: true },
 ];
 
 export const startups = [

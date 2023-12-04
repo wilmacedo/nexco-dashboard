@@ -42,12 +42,19 @@ export default function Page() {
         <div className="mt-8 w-full flex flex-col items-center justify-center">
           <div className="px-4 inline-flex items-center gap-4 border-b border-input">
             {tabs.map((tab, index) => (
-              <button key={index} onClick={() => handleTab(index)}>
+              <button
+                key={index}
+                onClick={() => handleTab(index)}
+                className="disabled:cursor-not-allowed"
+                disabled={tab.block}
+              >
                 <h3
+                  data-disabled={tab.block}
                   className={twMerge(
                     "text-muted-foreground text-2xl transition-colors",
                     "hover:text-foreground",
-                    tabs[currentTab].value === tab.value && "text-foreground"
+                    tabs[currentTab].value === tab.value && "text-foreground",
+                    "data-[disabled=true]:hover:text-muted-foreground"
                   )}
                 >
                   {tab.label}
