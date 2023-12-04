@@ -62,30 +62,3 @@ export const companies: Company[] = [
       "0af2798647909d9b58bf2f1af74c0c81f21115148e41c2cceaf515759a7b2185",
   },
 ];
-
-export const blockchainC = [
-  // 497986b480fcbe3e0e1e1ba10c0429922f5722bae6a3d4ca02165170b994754b
-  {
-    company: "Index Digital",
-    data: {
-      social: 45,
-      presence: 34,
-    },
-  },
-  // 13f03e7f0bda87e178c9b793eb222ce8b359bed85af89f6cc367f368bc2aa70f
-  {
-    company: "Roc",
-    data: {
-      social: 67,
-      presence: 54,
-    },
-  },
-  // 0af2798647909d9b58bf2f1af74c0c81f21115148e41c2cceaf515759a7b2185
-  {
-    company: "Bolero",
-    data: {
-      social: 54,
-      presence: 67,
-    },
-  },
-];
