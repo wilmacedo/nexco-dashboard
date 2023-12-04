@@ -16,7 +16,7 @@ export function Notifications() {
         <div className="flex items-center justify-between">
           <span className="text-sm font-medium">Notificações</span>
           <Link
-            href="/notifications"
+            href="/settings/notifications"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
             <Cog size={18} />
